@@ -8,7 +8,6 @@ Updated by Roman Yasinovskyy, 2017
 
 from abc import ABC, abstractmethod
 
-
 class LinkedListNode:
     """A node of a linked list"""
 
@@ -75,36 +74,36 @@ class LinkedList(ABC):
         return list_str
 
     @abstractmethod
-    def add(self, value):
-        """Add a new node"""
+    def push(self, value):
+        """Push a new node"""
         pass
 
     @abstractmethod
-    def remove(self, value):
+    def pop(self, value):
         """Remove a node with a specific value"""
         pass
 
     @abstractmethod
-    def search(self, value):
+    def find(self, value):
         """Search for a node with a specific value"""
         pass
 
 
-class UnorderedList(LinkedList):
-    """Unordered linked list implementation"""
+class ListUnsorted(LinkedList):
+    """Unsorted linked list implementation"""
 
     def __init__(self):
         """Create an unordered linked list"""
         LinkedList.__init__(self)
 
-    def add(self, value):
-        """Add a new node"""
+    def push(self, value):
+        """Push a new node at the front"""
         new_node = LinkedListNode(value)
         new_node.set_next(self._head)
         self._head = new_node
         self._count = self._count + 1
 
-    def remove(self, value):
+    def pop(self, value):
         """Remove a node with a specific value"""
         current = self._head
         prev = None
@@ -121,7 +120,7 @@ class UnorderedList(LinkedList):
             current = current.next
         raise ValueError("{} is not in the list".format(value))
 
-    def search(self, value):
+    def find(self, value):
         """Search for a node with a specific value"""
         current = self._head
 
@@ -132,15 +131,15 @@ class UnorderedList(LinkedList):
         return False
 
 
-class OrderedList(LinkedList):
-    """Ordered linked list implementation"""
+class ListSorted(LinkedList):
+    """Sorted linked list implementation"""
 
     def __init__(self):
-        """Create an Ordered linked list"""
+        """Create a Sorted linked list"""
         LinkedList.__init__(self)
 
-    def add(self, value):
-        """Add a new node"""
+    def push(self, value):
+        """Push a new node (sorted)"""
         current = self._head
         prev = None
         new_node = LinkedListNode(value)
@@ -157,12 +156,12 @@ class OrderedList(LinkedList):
             prev.next = new_node
         self._count = self._count + 1
 
-    def remove(self, value):
+    def pop(self, value):
         """Remove a node with a specific value"""
         # This is an exercise
         pass
 
-    def search(self, value):
+    def find(self, value):
         """Search for a node with a specific value"""
         # This is an exercise
         pass
